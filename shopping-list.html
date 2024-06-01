@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Shopping List App</title>
+
+  <!-- CSS style -->
+  <style>
+    ul {
+      list-style-type: "\2610";
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Shopping List</h1>
+  <form id="myForm">
+    <label for="item">Add an item:</label>
+    <input id="item" type="text" name="item">
+    <button type="submit" onclick="getItem(event)">Add</button>
+  </form>
+  <ul id="shoppingList">
+    <!-- list items will go into this ul via DOM manipulation -->
+  </ul>
+
+<!-- JavaScript -->
+<script>
+
+let shoppingListArray = [];
+
+function getItem(event) {
+  event.preventDefault();
+  const item = document.getElementById('item').value;
+  console.log(item);
+  if (item && !shoppingListArray.includes(item)) {
+    shoppingListArray.push(item);
+    shoppingListArray.sort();
+    addItemToList();
+    document.getElementById('myForm').reset(); // limpa o input 
+  }
+  console.log(shoppingListArray);
+}
+
+function addItemToList() {
+  const ul = document.getElementById('shoppingList');
+  ul.innerHTML = ''; 
+  shoppingListArray.forEach(item => {
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(item));
+    ul.appendChild(li);
+  });
+}
+
+document.getElementById('shoppingList').addEventListener('click', function(event) {
+  if (event.target.tagName === 'LI') {
+    event.target.classList.toggle('checked');
+  }
+});
+
+</script>
+
+</body>
+
+</html>
+
+<!-- i stopped at step 5 -->
