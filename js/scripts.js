@@ -25,8 +25,19 @@ function addItemToList() {
   shoppingListArray.forEach(item => {
     const li = document.createElement('li');
     li.appendChild(document.createTextNode(item));
+    li.addEventListener('click', removeItem); // adiciona EventListener para remover o item
     ul.appendChild(li);
   });
+}
+
+function removeItem(event) {
+  const item = event.currentTarget.textContent;
+  const index =shoppingListArray.indexOf(item);
+  if (index > -1) {
+    shoppingListArray.splice(index, 1);
+    removeList(); //limpa a lista antiga
+    addItemToList(); //adiciona nova lista
+  } 
 }
 
 document.getElementById('shoppingList').addEventListener('click', function(event) {
