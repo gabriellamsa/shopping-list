@@ -5,7 +5,7 @@ function getItem(event) {
     const item = document.getElementById('item').value.trim();
     try {
       if (!item) {
-        throw new Error('Item cannot be empty');
+        console.error('Item cannot be empty');
       }
       if (item && !shoppingListArray.includes(item)) {
         shoppingListArray.push(item);
@@ -42,7 +42,7 @@ function removeItem(event) {
   try {
     const index =shoppingListArray.indexOf(item);
   if (index > -1) {
-    throw new Error('Item not found in the list');
+    console.error('Item not found in the list');
     }
     shoppingListArray.splice(index, 1);
     removeList(); //limpa a lista antiga
@@ -50,6 +50,10 @@ function removeItem(event) {
   } catch (error) {
     console.error(error); // trata o erro conforme necessário
   }
+}
+
+function printShoppingList() {
+  window.print();
 }
 
 document.getElementById('shoppingList').addEventListener('click', function(event) {
